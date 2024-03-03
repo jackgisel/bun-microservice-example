@@ -4,25 +4,15 @@ import {Task} from "../db/schema/task.ts";
 export const TasksItem = ({ task }: { task: Task }) => {
     const { id, title, completed } = task;
     return (
-        <div class='grid grid-cols-[70%_13%_13%] gap-4 w-[500px] max-w-[500px]'>
-            <span class='text-lg'>{title}</span>
+        <div class='grid grid-cols-[6%_94%] w-[500px] max-w-[500px]'>
             <input
                 type='checkbox'
                 checked={completed}
                 hx-post={`/tasks/toggle/${id}`}
                 hx-swap='innerHTML'
-                class='w-fit self-center'
+                class='checkbox'
             />
-            <button
-                hx-delete={`/tasks/${id}`}
-                class='bg-red-600 text-white px-2 py-1 rounded text-xs w-fit h-fit self-center'
-                hx-target='.root-tasks'
-                hx-swap='innerHTML'
-                // @ts-ignore
-                _='on click toggle @disabled until htmx:afterSwap'
-            >
-                Delete
-            </button>
+            <span class='text-lg'>{title}</span>
         </div>
     );
 };
@@ -45,7 +35,7 @@ export const CreateTasksForm = () => {
 
     return (
         <form
-            class='flex items-center justify-between gap-4 w-full'
+            class='form-control'
             hx-post='/tasks'
             hx-swap='beforebegin'
             hx-target='.insert-task'
@@ -55,7 +45,7 @@ export const CreateTasksForm = () => {
             <input
                 type='text'
                 name='title'
-                class='border border-blue-300 px-4 py-2 rounded w-full ring-2 ring-transparent focus:ring-blue-300 focus:outline-none transition-all duration-200'
+                class='input input-bordered w-full transition-all duration-200'
             />
         </form>
     );
